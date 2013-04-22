@@ -2,6 +2,7 @@ import sys
 import numpy as np
 import pylab as pl
 from sklearn.svm import SVC
+from sklearn.decomposition import PCA
 from FeatureHolder import FeatureHolder
 from matplotlib.colors import ListedColormap
 
@@ -70,7 +71,7 @@ def main(argv):
             pl.title(t)
             pl.axis("tight")
 
-            pl.show()
+#            pl.show()
             print
 
     X = a.features[:,features]
@@ -102,6 +103,24 @@ def main(argv):
     clf.fit(X,Y)
     print "Polynomial SVM Classifier using all Features had a score of %s" % (clf.score(X,Y),)
     print
+
+    for i in xrange(10):
+        pca = PCA(n_components=i)
+        pca.fit(X)
+        X_new = pca.transform(X)
+        clf = SVC(kernel='linear')
+        clf.fit(X_new,Y)
+        print "Linear SVM Classifier using PCA with %s and had a score of %s" % (i,clf.score(X,Y),)
+        clf = SVC(kernel='rbf')
+        clf.fit(X_new,Y)
+        print "Gaussian SVM Classifier using PCA with %s and had a score of %s" % (i,clf.score(X,Y),)
+        clf = SVC(kernel='sigmoid')
+        clf.fit(X_new,Y)
+        print "Sigmoid SVM Classifier using PCA with %s and had a score of %s" % (i,clf.score(X,Y),)
+        clf = SVC(kernel='poly')
+        clf.fit(X_new,Y)
+        print "Poly SVM Classifier using PCA with %s and had a score of %s" % (i,clf.score(X,Y),)
+
 
 if __name__=='__main__':
     main(sys.argv)
