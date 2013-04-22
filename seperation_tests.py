@@ -70,7 +70,7 @@ def main(argv):
             pl.title(t)
             pl.axis("tight")
 
-#            pl.show()
+            pl.show()
             print
 
     X = a.features[:,features]
