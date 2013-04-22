@@ -86,6 +86,22 @@ def main(argv):
     clf = SVC(kernel='poly')
     clf.fit(X,Y)
     print "Polynomial SVM Classifier using all %s Features had a score of %s" % (len(features),clf.score(X,Y),)
+    print
+
+    X = a.features
+    clf = SVC(kernel='linear')
+    clf.fit(X,Y)
+    print "Linear SVM Classifier using all Features had a score of %s" % (clf.score(X,Y),)
+    clf = SVC(kernel='rbf')
+    clf.fit(X,Y)
+    print "Gaussian SVM Classifier using all Features had a score of %s" % (clf.score(X,Y),)
+    clf = SVC(kernel='sigmoid')
+    clf.fit(X,Y)
+    print "Sigmoid SVM Classifier using all Features had a score of %s" % (clf.score(X,Y),)
+    clf = SVC(kernel='poly')
+    clf.fit(X,Y)
+    print "Polynomial SVM Classifier using all Features had a score of %s" % (clf.score(X,Y),)
+    print
 
 if __name__=='__main__':
     main(sys.argv)
